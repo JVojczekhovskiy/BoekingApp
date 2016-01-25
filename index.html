@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title></title>
+  <link href='styles/main.css' rel='stylesheet' type="text/css">
+</head>
+<body ng-app="boekingApp">
+  <h1>Boekingen vergaderzaal</h1>
+  <div ng-controller="mainCtrl" class="list">
+    <div class="item">
+      <label>Naam boeker: </label>
+      <input ng-model="naam" type="text"/>
+      <label>Info boeking: </label>
+      <input ng-model="info" type="text"/>
+      <label>Doel boeking: </label>
+      <input ng-model="doel" type="text"/>
+      <label>Tijd boeking: </label>
+      <input ng-model="tijd" type="text"/>
+
+      <div class="actions">
+        <a href="" ng-click="addBooking(naam,info,doel,tijd)">add</a>
+      </div>
+     </div>
+
+     <h3 style="text-align:center">Gemaakte boekingen</h3>
+
+     <div class="item"  ng-repeat="boeking in boekingen">
+       <label>Naam boeker: {{boeking.name}} </label>
+       <label>Info boeking: {{boeking.info}} </label>
+       <label>Doel boeking: {{boeking.doel}} </label>
+       <label>Tijd boeking: {{boeking.tijd}}</label>
+       <div class="actions">
+         <a href="" ng-click="deleteBooking(booking, $index)"  class="Delete">delete</a>
+       </div>
+      </div>
+  </div>
+  <script src="vendor/angular.js" type="text/javascript"></script>
+  <script src="scripts/app.js" type="text/javascript"></script>
+  <script src="scripts/controllers/main.js" type="text/javascript"></script>
+  <script src="scripts/services/data.js" type="text/javascript"></script>
+</body>
+</html>
