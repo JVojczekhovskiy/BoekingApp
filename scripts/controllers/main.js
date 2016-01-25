@@ -19,6 +19,6 @@ angular.module('boekingApp')
 
   $scope.deleteBoeking = function(boeking, $index) {
     dataService.deleteBoeking(boeking);
-    $scope.bookingen.splice($index, 1);
+    $scope.boekingen.splice($index, 1);
   };
 })
