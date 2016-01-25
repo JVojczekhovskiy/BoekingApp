@@ -9,16 +9,24 @@
   <div ng-controller="mainCtrl" class="list">
     <div class="item">
       <label>Naam boeker: </label>
-      <input name="naam" ng-model="naam" type="text"/>
+      <input ng-model="naam" type="text"/>
       <label>Info boeking: </label>
-      <input name="info" ng-model="info" type="text"/>
+      <input ng-model="info" type="text"/>
       <label>Doel boeking: </label>
-      <input name="doel" ng-model="doel" type="text"/>
+      <input ng-model="doel" type="text"/>
       <label>Tijd boeking: </label>
-      <input name="tijd" ng-model="tijd" type="text"/>
+      <select ng-model="dag" ng-options="dag for dag in dagen" ng-init="dag = dagen[0]">
+        <option value="{{dag}}">{{dag}}</option>
+      </select>
+      <select ng-model="maand" ng-options="maand for maand in maanden" ng-init="maand = maanden[0]">
+        <option value="{{maand}}">{{maand}}</option>
+      </select>
+      <select ng-model="tijd" ng-options="tijd for tijd in tijden" ng-init="tijd = tijden[0]">
+        <option value="{{tijd}}">{{tijd}}</option>
+      </select>
 
       <div class="actions">
-        <a href="" ng-click="addBoeking(naam,info,doel,tijd); resetInput()">add</a>
+        <a href="" ng-click="addBoeking(naam,info,doel,dag,maand,tijd); resetInput()">add</a>
       </div>
      </div>
 
