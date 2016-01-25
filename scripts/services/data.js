@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('bookingApp')
+angular.module('boekingApp')
 .service('dataService', function($http) {
 
-  this.deleteBooking = function(booking) {
-    console.log("The " + booking.name + " booking has been deleted!")
+  this.deleteBoeking = function(boeking) {
+    console.log("The " + boeking.name + " booking has been deleted!")
     // other logic
   };
 });

@@ -9,28 +9,28 @@
   <div ng-controller="mainCtrl" class="list">
     <div class="item">
       <label>Naam boeker: </label>
-      <input ng-model="naam" type="text"/>
+      <input name="naam" ng-model="naam" type="text"/>
       <label>Info boeking: </label>
-      <input ng-model="info" type="text"/>
+      <input name="info" ng-model="info" type="text"/>
       <label>Doel boeking: </label>
-      <input ng-model="doel" type="text"/>
+      <input name="doel" ng-model="doel" type="text"/>
       <label>Tijd boeking: </label>
-      <input ng-model="tijd" type="text"/>
+      <input name="tijd" ng-model="tijd" type="text"/>
 
       <div class="actions">
-        <a href="" ng-click="addBooking(naam,info,doel,tijd)">add</a>
+        <a href="" ng-click="addBoeking(naam,info,doel,tijd); resetInput()">add</a>
       </div>
      </div>
 
      <h3 style="text-align:center">Gemaakte boekingen</h3>
 
      <div class="item"  ng-repeat="boeking in boekingen">
-       <label>Naam boeker: {{boeking.name}} </label>
-       <label>Info boeking: {{boeking.info}} </label>
-       <label>Doel boeking: {{boeking.doel}} </label>
-       <label>Tijd boeking: {{boeking.tijd}}</label>
+       <label><b>Naam boeker:</b> {{boeking.name}} </label>
+       <label><b>Info boeking:</b> {{boeking.info}} </label>
+       <label><b>Doel boeking:</b> {{boeking.doel}} </label>
+       <label><b>Tijd boeking:</b> {{boeking.tijd}}</label>
        <div class="actions">
-         <a href="" ng-click="deleteBooking(booking, $index)"  class="Delete">delete</a>
+         <a href="" ng-click="deleteBoeking(boeking, $index)"  class="Delete">delete</a>
        </div>
       </div>
   </div>
