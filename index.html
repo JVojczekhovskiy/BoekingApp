@@ -1,64 +1,101 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <title></title>
-  <link href='styles/main.css' rel='stylesheet' type="text/css">
-</head>
-<body ng-app="boekingApp">
-  <h1>Boekingen vergaderzaal</h1>
-  <div ng-controller="mainCtrl" class="list">
-    <div class="item">
-      <label>Naam boeker: </label>
-      <input ng-model="naam" type="text"/>
-      <label>Info boeking: </label>
-      <input ng-model="info" type="text"/>
-      <label>Doel boeking: </label>
-      <input ng-model="doel" type="text"/>
-      <label>Tijd boeking: </label>
-      <select ng-model="dag" ng-options="dag for dag in dagen" ng-init="dag = dagen[0]">
-        <option value="{{dag}}">{{dag}}</option>
-      </select>
-      <select ng-model="maand" ng-options="maand for maand in maanden" ng-init="maand = maanden[0]">
-        <option value="{{maand}}">{{maand}}</option>
-      </select>
-      <select ng-model="tijd" ng-options="tijd for tijd in tijden" ng-init="tijd = tijden[0]">
-        <option value="{{tijd}}">{{tijd}}</option>
-      </select>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href='styles/main.css' rel='stylesheet' type="text/css">
 
-      <div class="actions">
-        <a href="" ng-click="addBoeking(naam,info,doel,dag,maand,tijd); resetInput()">add</a>
+    <title>Boekingen vergaderzaal</title>
+
+    <!-- Bootstrap -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-app="boekingApp">
+    <div ng-controller="mainCtrl" class="container">
+        <div class="header clearfix">
+          <h3 class="text-center">Boekingen vergaderzaal</h3>
+        </div>
+
+        <div class="jumbotron">
+          <form class="form-horizontal" ng-submit="addBoeking(naam,info,doel,dag,maand,tijd); resetInput()">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Naam boeker: </label>
+              <div class="col-sm-10">
+                <input ng-model="naam" type="text" maxlength="30" class="form-control" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Info boeking: </label>
+              <div class="col-sm-10">
+                <input ng-model="info" type="text" maxlength="30" class="form-control" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Doel boeking: </label>
+              <div class="col-sm-10">
+                <input ng-model="doel" type="text" maxlength="30" class="form-control" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Tijd boeking: </label>
+              <div class="col-sm-10">
+                <select ng-model="dag" ng-options="dag for dag in dagen" ng-init="dag = dagen[0]" class="form-control custom-select" required>
+                  <option value="{{dag}}">{{dag}}</option>
+                </select>
+                <select ng-model="maand" ng-options="maand for maand in maanden" ng-init="maand = maanden[0]" class="form-control custom-select" required>
+                  <option value="{{maand}}">{{maand}}</option>
+                </select>
+                <select ng-model="tijd" ng-options="tijd for tijd in tijden" ng-init="tijd = tijden[0]" class="form-control custom-select" required>
+                  <option value="{{tijd}}">{{tijd}}</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg center-block">Boeken</button>
+          </form>
+        </div>
+
+          <h3 class="center-block" ng-show="boekingen.length>0">Gemaakte boekingen</h3>
+          <div class="table-responsive">
+            <table class="table custom-table"  ng-show="boekingen.length>0">
+              <tbody>
+                <tr>
+                  <th style="width:25%"><u>Naam boeker</u></th>
+                  <th style="width:25%"><u>Info boeking</u></th>
+                  <th style="width:25%"><u>Doel boeking</u></th>
+                  <th style="width:20%"><u>Tijd boeking</u></th>
+                  <th style="width:5%"></th>
+                </tr>
+                <tr ng-repeat="boeking in boekingen">
+                  <td>{{boeking.name}}</td>
+                  <td>{{boeking.info}}</td>
+                  <td>{{boeking.doel}}</td>
+                  <td>{{boeking.tijd}}</td>
+                  <td><a href="" ng-click="deleteBoeking(boeking, $index)" >delete</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        <footer class="footer">
+          <p>&copy; 2016 IamProgrez, Inc.</p>
+        </footer>
+
       </div>
-     </div>
 
-     <h3 style="text-align:center" ng-show="boekingen.length>0">Gemaakte boekingen</h3>
-
-     <table style="width:100%" ng-show="boekingen.length>0">
-       <tbody>
-         <tr>
-           <th>Naam boeker</th>
-           <th>Info boeking</th>
-           <th>Doel boeking</th>
-           <th>Tijd boeking</th>
-           <th style="width:45px"></th>
-         </tr>
-         <tr ng-repeat="boeking in boekingen">
-           <td>{{boeking.name}}</td>
-           <td>{{boeking.info}}</td>
-           <td>{{boeking.doel}}</td>
-           <td>{{boeking.tijd}}</td>
-           <td><a href="" ng-click="deleteBoeking(boeking, $index)"  class="Delete">delete</a></td>
-         </tr>
-
-       </tbody>
-
-     </table>
-
-
-
-  </div>
-  <script src="vendor/angular.js" type="text/javascript"></script>
-  <script src="scripts/app.js" type="text/javascript"></script>
-  <script src="scripts/controllers/main.js" type="text/javascript"></script>
-  <script src="scripts/services/data.js" type="text/javascript"></script>
-</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="vendor/angular.js" type="text/javascript"></script>
+    <script src="scripts/app.js" type="text/javascript"></script>
+    <script src="scripts/controllers/main.js" type="text/javascript"></script>
+    <script src="scripts/services/data.js" type="text/javascript"></script>
+  </body>
 </html>

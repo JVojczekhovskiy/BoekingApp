@@ -13,12 +13,7 @@ angular.module('boekingApp')
   };
 
   $scope.resetInput = function(){
-    $scope.naam = "";
-    $scope.info = "";
-    $scope.doel = "";
-    $scope.dag = "";
-    $scope.maand = "";
-    $scope.tijd = "";
+    document.getElementsByClassName('form-horizontal')[0].reset();
   }
 
   $scope.deleteBoeking = function(boeking, $index) {
