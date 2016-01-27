@@ -1,1 +1,1 @@
-angular.module("boekingApp", []);
+angular.module("boekingApp", ['ngResource','lbServices']);
