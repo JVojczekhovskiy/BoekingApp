@@ -13,20 +13,18 @@ angular.module('boekingApp')
       "information": i,
       "purpose": d,
       "time": new Date(m+" "+da+", 2016 "+t+":00 UTC").toISOString()
-    });
-    $scope.boekingen = Booking.find();
+    }).$promise.then(function(boeking) {
+ 			 		$scope.boekingen.push(boeking);
+          document.getElementsByClassName('form-horizontal')[0].reset();
+ 		});
   };
 
-  //$scope.b1 = Booking.findById({ id: '56a8e4e8106f1ac822e268e3' });
-
-  $scope.resetInput = function(){
-    document.getElementsByClassName('form-horizontal')[0].reset();
-  }
-
   $scope.deleteBoeking = function($index) {
-    Booking.deleteById({ id: $scope.boekingen[$index].id })
-      .$promise
-      .then(function() { console.log('deleted'); });
-    $scope.boekingen.splice($index, 1);
+    Booking.deleteById({
+      id: $scope.boekingen[$index].id
+    }).$promise.then(function(){
+      console.log('deleted');
+      $scope.boekingen.splice($index, 1);
+    });
   };
 })
